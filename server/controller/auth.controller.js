@@ -8,12 +8,12 @@ async function signup(req, res) {
         console.log(data)
         const user=await userModel.create(data)
         if(user){
-            res.json({
+            return res.json({
                 message: "user signed up successfully",
                 data: user
             })
         }else{
-            res.json({
+            return res.status(401).json({
                 message: "user not signed up",
             })
         }
@@ -51,7 +51,7 @@ async function login(req, res) {
             });
         }
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message });
     }
 }
 
