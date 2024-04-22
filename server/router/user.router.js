@@ -6,15 +6,15 @@ const {protectRoute,isAuthorised}= require('../controller/middleware')
 
 userRouter.use(protectRoute)
 
-userRouter
-.route("/:id")
-.patch(updateUser)
-.delete(deleteUser)
-
 
 userRouter
 .route("/userProfile")
 .get(getUser)
+
+userRouter
+.route("/:id")
+.patch(updateUser)
+.delete(deleteUser)
 
 userRouter.use(isAuthorised(['admin']))
 userRouter
