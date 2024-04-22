@@ -1,17 +1,17 @@
 const userModel=require("../model/user.model")
 
-function getUser(req,res){
+async function getUser(req,res){
     try{
         const id=req.id
-        const user=userModel.findById(id)
+        const user=await userModel.findById(id)
         if(user){
             res.json({
                 message:"User details retrieved successfully",
-                data:user
+                user
             })
         }
     }catch(err){
-        res.json({
+        res.status(500).json({
             message:err.message
         })
     }

@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { PiDotsThreeBold } from 'react-icons/pi'
 import profile from '../../assets/profile.jpg'
+import axios from 'axios'
+import { useNavigate } from "react-router-dom"
+
 const Profile = () => {
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+        async function fetchData() {
+            const response = await axios.get('http://localhost:4000/user/userProfile')
+            
+            if(!response.sucess)
+                navigate("/auth/login")
+        }
+
+        fetchData()
+    }, [])
+
     return (
         <div className=' h-full  flex items-center justify-center'>
             <div className="profile-card rounded shadow-2xl p-4">
