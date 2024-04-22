@@ -12,15 +12,13 @@ async function protectRoute(req, res, next) {
                 req.id = user.id
                 next()
 
-            } else {
-                return res.json({
-                    message: 'Invalid Login'
-                })
             }
-
-        } else {
-            res.redirect('/login')
         }
+        return res.status(200).json({
+            sucsess: false,
+            message: 'Invalid Login'
+        })
+
     } catch (e) {
         return res.status(500).json({
             message: e.message
