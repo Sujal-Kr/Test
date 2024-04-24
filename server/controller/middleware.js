@@ -12,12 +12,10 @@ async function protectRoute(req, res, next) {
                 req.role = user.role
                 req.id = user.id
                 next()
-
             } 
         } else {
-            return res.json({
-                message: "You need to login first.",
-                success:false
+            return res.status(302).json({
+                message: "Babes sit on my face"
             })
         }
     } catch (e) {

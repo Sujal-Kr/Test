@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     const res = await axios.post('http://localhost:4000/auth/login', {
       email: email,
       password: password
-    })
+    },{withCredentials: true} )
 
     setUser(res.data)
     localStorage.setItem('user', JSON.stringify(res.data))

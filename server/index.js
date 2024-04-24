@@ -5,7 +5,10 @@ const app = express()
 require('dotenv').config()
 app.use(express.json())
 app.use(cookie())
-app.use(cors())
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials: true,
+}))
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {

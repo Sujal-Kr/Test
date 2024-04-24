@@ -35,7 +35,7 @@ async function login(req, res) {
             if (passwordMatch) {
                 let id = user._id;
                 let token = jwt.sign({ payload: id }, KEY);
-                res.cookie('login', token, { httpOnly: true });
+                res.cookie('login', token, { httpOnly: false });
                 return res.json({
                     message: "User logged in successfully",
                     user: user

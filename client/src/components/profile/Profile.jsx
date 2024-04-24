@@ -1,7 +1,20 @@
-import React from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import { PiDotsThreeBold } from 'react-icons/pi'
 import profile from '../../assets/profile.jpg'
+import { AuthContext } from '../../context/auth.context'
+import axios from 'axios'
 const Profile = () => {
+    const [data,setData]=useState(null)
+    const {user}=useContext(AuthContext)
+    const fetchDetails=async()=>{
+        const res= await axios.get("http://localhost:4000/user/userProfile")
+        console.log(res.data)
+        setData(res.data)
+        
+    }
+    useEffect(()=>{
+        fetchDetails()
+    },[user])
     return (
         <div className=' h-full  flex items-center justify-center'>
             <div className="profile-card rounded shadow-2xl p-4">
@@ -10,7 +23,7 @@ const Profile = () => {
                         <img src={profile} className='h-full w-full rounded-full' />
                     </div>
                     <div className="profile-name">
-                        <h3 className='text-2xl'>Hannah Baker</h3>
+                        <h3 className='text-2xl'>{data?.username||"Hannah Baker"}</h3>
                         <h5 className='text-sm'>Student,Riverdale</h5>
                     </div>
                     <div className=' text-xl absolute top-2 right-2 '>
